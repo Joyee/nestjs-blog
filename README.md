@@ -65,3 +65,9 @@ bootstrap();
 #### 2. 创建控制器
 
 `nest g co posts`
+
+#### 3. 创建服务类
+
+`nest g service posts`
+
+#### 创建顺序：Module -> Controller、Service。
