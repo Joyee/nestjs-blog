@@ -71,3 +71,73 @@ bootstrap();
 `nest g service posts`
 
 #### 创建顺序：Module -> Controller、Service。
+
+### 连接数据库
+
+MacOs安装mysql有两种方法
+
+1. Mysql官网安装社区版
+2. `brew install mysql`
+
+#### 使用 TypeORM (ORM: Object-Relational Mapping)
+
+1. 安装 `pnpm install @nestjs/typeorm typeorm mysql2 -S`
+
+2. 连接数据库
+
+   方法1)
+
+   在项目根目录下新建 `.env`和 `.env.prod` 分别存 开发环境和 线上环境。
+
+   ```
+   // 数据库地址
+   DB_HOST=localhost
+   // 端口号
+   DB_PORT=3306
+   // 数据库登录名
+   DB_USER=root
+   // 数据库登录密码
+   DB_PASSWD=xxxx
+   // 数据库名称
+   DB_DATABASE=blog
+   ``` 
+   
+   配置环境：在根目录下新建文件夹`config`，再新建`env.ts`(用于根据不同环境读取相应的配置文件)
+   
+   在 `app.module.ts`中连接数据库:
+
+      1. 使用环境变量, 安装 @nestjs/config `pnpm install @nestjs/config -S`
+      2. 配置(开箱即用)
+  
+  方法2)
+
+    根目录下新增 `orm.config.ts`
+
+    ```
+    {
+      "type": "mysql",
+      "host": "localhost",
+      "port": 3306,
+      "username": "root",
+      "password": "12345678",
+      "database": "blog",
+      "entities": ["dist/**/*.entity{.ts,.js}"],
+      "synchronize": true
+    }
+    ```
+
+    在 `app.module.ts` 中调用 `TypeormModule.forRoot()` 即:
+
+    ```
+    import ormconfig from '../orm.config';
+
+    @Module({
+      imports: [
+        TypeOrmModule.forRoot(ormconfig),
+        PostsModule,
+      ],
+      controllers: [AppController, PostsController],
+      providers: [AppService, PostsService],
+    })
+    ```
+    
