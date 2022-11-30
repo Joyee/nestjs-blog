@@ -97,7 +97,7 @@ MacOs安装mysql有两种方法
    // 数据库登录名
    DB_USER=root
    // 数据库登录密码
-   DB_PASSWD=xxxx
+   DB_PASSWORD=xxxx
    // 数据库名称
    DB_DATABASE=blog
    ``` 
@@ -140,4 +140,13 @@ MacOs安装mysql有两种方法
       providers: [AppService, PostsService],
     })
     ```
-    
+
+#### CRUD(create、read、update、delete)
+
+##### 建表
+
+`posts/posts.entity.ts`
+
+##### 操作`CRUD`的业务逻辑
+
+`posts/posts.service.ts`

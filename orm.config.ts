@@ -7,7 +7,7 @@ const config: DataSourceOptions = {
   username: 'root',
   password: '12345678',
   database: 'blog',
-  synchronize: true,
+  synchronize: false,
   entities: ['dist/**/*.entity{.ts,.js}'],
 };
 
