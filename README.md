@@ -150,3 +150,37 @@ MacOs安装mysql有两种方法
 ##### 操作`CRUD`的业务逻辑
 
 `posts/posts.service.ts`
+
+### 接口格式统一
+
+请求成功
+
+```
+{
+  "code": 0,
+  "message": "OK",
+  "data": {}
+}
+```
+
+请求失败
+
+```
+{
+  "code": -1,
+  "message": "error reason",
+  "data": {}
+}
+```
+
+#### 拦截错误请求
+
+使用命令创建一个过滤器:
+
+`nest g filter core/filter/http-exception`
+
+编辑 `core/filter/http-exception/http-exception.filter.ts`
+
+在`main.ts`中全局注册
+
+`app.useGlobalFilters(new HttpExceptionFilter());`
