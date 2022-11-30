@@ -184,3 +184,21 @@ MacOs安装mysql有两种方法
 在`main.ts`中全局注册
 
 `app.useGlobalFilters(new HttpExceptionFilter());`
+
+#### 拦截成功的返回数据
+
+使用命令创建一个拦截器
+
+`nest g interceptor core/interceptor/transform`
+
+编辑 `core/interceptor/transform/transform.interceptor.ts`
+
+在`main.ts`中全局注册
+
+`app.useGlobalInterceptors(new TransformInterceptor());`
+
+### 配置接口文档Swagger
+
+### 数据验证
+
+Nest.js中的管道就是专门用来做数据转换的。
