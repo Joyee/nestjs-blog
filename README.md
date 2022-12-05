@@ -51,6 +51,8 @@ bootstrap();
 
 `nest g [文件类型] [文件名] [文件目录]`
 
+`nest g mo` `nest go co` `nest go service` 可以简化成一个命令
+
 #### 1. 创建模块
 
 > nest g mo posts 创建一个posts模块，文件目录不写，默认创建和文件名一样的posts目录。在posts目录下新建 `posts.module.ts`

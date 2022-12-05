@@ -10,7 +10,7 @@ import {
   Query,
 } from '@nestjs/common';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
-import { CreatePostDto } from './dto/create-post.dot';
+import { CreatePostDto } from './dto/create-post.dto';
 import { PostsEntity } from './posts.entity';
 import { PostsService } from './posts.service';
 
@@ -36,7 +36,7 @@ export class PostsController {
   }
 
   @Put(':id')
-  async update(@Param('id') id: number, @Body() post) {
+  async update(@Param('id') id: number, @Body() post: PostsEntity) {
     return await this.postsService.updateById(id, post);
   }
 
