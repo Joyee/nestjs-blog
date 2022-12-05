@@ -199,6 +199,61 @@ MacOs安装mysql有两种方法
 
 ### 配置接口文档Swagger
 
+安装
+
+`npm install @nestjs/swagger swagger-ui-express -S`
+
+在`main.ts`配置Swagger文档信息
+
+```
+async function bootstrap() {
+  const app = await NestFactory.create<NestExpressApplication>(AppModule);
+  ...
+
+  // 设置swagger文档
+  const config = new DocumentBuilder()
+    .setTitle('管理后台')
+    .setDescription('管理后台接口文档')
+    .setVersion('1.0')
+    .addBearerAuth()
+    .build();
+  const document = SwaggerModule.createDocument(app, config);
+  SwaggerModule.setup('docs', app, document);
+
+  await app.listen(8888);
+}
+bootstrap();
+```
+
+访问: `http://localhost:8888/docs`
+
+#### 接口标签
+
+可以根据`Controller`来分类，只要添加`@ApiTags`就可以
+
+#### 接口传参
+
+DTO(Data Transfer Object)
+
+在 `post` 目录下创建一个`dto`文件夹，再创建一个`create-post.dto.ts`文件:
+
+```
+export class CreatePostDto {
+  readonly title: string;
+  readonly author: string;
+  readonly content: string;
+  readonly cover_url: string;
+  readonly type: number;
+}
+```
+
+在`Controller`中对创建文章是传入的参数进行类型说明：
+
+
 ### 数据验证
 
-Nest.js中的管道就是专门用来做数据转换的。
+Nest.js中的`管道`就是专门用来做数据转换的。
+
+Nest提供的: ValidationPipe、ParseIntPipe和ParseUUIDPipe, 其中ValidationPipe 配合class-validator
+
+需要安装 `npm install class-validator class-transformer -S`
